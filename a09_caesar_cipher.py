@@ -93,21 +93,20 @@ class CaesarCipher:
 
         :return: a string representing the original message
         """
-        # TODO Complete the decrypt method
+
         output = ""
 
-        for i in self.message:                 #For every character in the message
-            if i.upper() in self.alphabet:     #If letter capitalized is in the alphabet
-                # old_letter = self.alphabet.find(i.upper())  #the old letter
-                # output += self.alphabet[(old_letter + self.key) % 26] #Adds a letter from the alphabet
+        for i in self.cipher: #For every character in the cipher
+            if i.upper() in self.alphabet: #If the capitilized version of the character is in the alphabet
+                old_letter = self.alphabet.find(i.upper())
 
-                output = "a"
-            # else:
-            #     output += i # Adds non-alphabet characters directly
+                output += self.alphabet[(old_letter - self.key) % 26] #shifts each letter to the left by the key
+            else:
+                output += i         # Adds non-alphabet characters directly
 
         if __name__ == "__main__":
             print("Message Decrypted")
-        return output           # Obviously this should output something else
+        return output           # Returns string representing original message
 
 
 def main():
