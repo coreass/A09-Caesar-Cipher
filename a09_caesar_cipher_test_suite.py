@@ -53,5 +53,22 @@ def CaesarCipher_test_suite():
 
     # what other tests should you add?
 
+    #Test decrypting a string with a number
+    caesar.key = 25
+    caesar.cipher = "3 ZMSR"
+
+    testit(caesar.decrypt() == "3 ANTS")
+
+    #Tests decrypting a string with lowercase letters
+    caesar.key = 2
+    caesar.cipher = "jgnnq"   #Doesn't work with lower case letters
+
+    testit(caesar.decrypt() == "hello")
+
+   #Tests decrypting the same string as above but with capital letters, to make sure the only reason it failed above was because it doesn't work with lower case letters
+    caesar.key = 2
+    caesar.cipher = "JGNNQ"
+
+    testit(caesar.decrypt() == "HELLO")
 
 CaesarCipher_test_suite()

@@ -1,6 +1,6 @@
 ######################################################################
-# Author: Emily Lovell & Scott Heggen      TODO: Change this to your names
-# Username: lovelle & heggens             TODO: Change this to your usernames
+# Author: Emily Lovell & Scott Heggen      TODO: Susan Coreas
+# Username: lovelle & heggens             TODO: coreass
 #
 # Assignment: A09: Caesar Cipher
 #
@@ -18,7 +18,10 @@
 
 
 class CaesarCipher:
-    # FIXME: Add a docstring for the class definition
+    '''
+    A class representing the Caesar cipher
+    '''
+
 
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"            # The alphabet, which will be used to do our shifts
 
@@ -90,11 +93,20 @@ class CaesarCipher:
 
         :return: a string representing the original message
         """
-        # TODO Complete the decrypt method
+
         output = ""
+
+        for i in self.cipher: #For every character in the cipher
+            if i.upper() in self.alphabet: #If the capitilized version of the character is in the alphabet
+                old_letter = self.alphabet.find(i.upper())
+
+                output += self.alphabet[(old_letter - self.key) % 26] #shifts each letter to the left by the key
+            else:
+                output += i         # Adds non-alphabet characters directly
+
         if __name__ == "__main__":
             print("Message Decrypted")
-        return output           # Obviously this should output something else
+        return output           # Returns string representing original message
 
 
 def main():
@@ -106,19 +118,25 @@ def main():
 
     # Caesar has some letters to send and receive.
     # Letter 1 goes to P. Lentulus Spinther, who has agreed with Caesar to use a key of 3
-    # TODO Construct a new CaesarCipher object called cipher_lentulus
-    # TODO Encrypt the file specified in the constructor
-    # TODO Write the output to a file
+    cipher_Lentulus = CaesarCipher("letter_to_friend_1.txt", 3, "encrypt")
+    cipher_textLentulus = cipher_Lentulus.encrypt()
+    cipher_Lentulus.export_file(cipher_textLentulus, "cipher_Lentulus.txt")
+
 
 
     # Letter 2 goes to Marcus Tullius Cicero, who has agreed to use a key of 14
-    # TODO Construct a new CaesarCipher object called cipher_marcus
-    # TODO Encrypt the file specified in the constructor
-    # TODO Write the output to a file
+    cipher_marcus = CaesarCipher("letter_to_friend_2.txt", 14, "encrypt")
+    cipher_textmarcus = cipher_marcus.encrypt()
+    cipher_marcus.export_file(cipher_textmarcus, "cipher_marcus.txt")
+
+
+
 
 
     # Letter 3 is coming from Cicero for Caesar to decrypt. Again, they agreed to use key 14
     cipher3 = CaesarCipher("cipher_from_friend_3.txt", 14, "decrypt")   # constructs a new CaesarCipher object called cipher3
+    cipher_text3 = cipher3.decrypt()
+    cipher3.export_file(cipher_text3, "message_from_friend_3.txt")
     # TODO Decrypt the file specified in the constructor
     # TODO Write the output to a file using the export_file() method
 
